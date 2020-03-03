@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesLoader {
-    private static final String pathToPropertyFile = "src/test/java/hometask2/files/task.properties";
+    private static final String pathToPropertyFile = "src/test/resources/task.properties";
 
     public static String getProperty(String key) {
         return getValuePipeline(key);
