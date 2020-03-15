@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static hometask2.PropertiesLoader.pathToPropertyFile;
+
 class Helper {
     static Map<Integer, String> getMapFromProperties(Set<Integer> keys) {
         Map<Integer, String> map = new LinkedHashMap<>();
         keys.forEach(key -> {
-            String value = PropertiesLoader.getProperty(key.toString());
+            String value = PropertiesLoader.getProperty(pathToPropertyFile, key.toString());
             map.put(key, value);
         });
         return map;

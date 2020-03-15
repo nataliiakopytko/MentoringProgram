@@ -5,13 +5,31 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesLoader {
-    private static final String pathToPropertyFile = "src/test/resources/task.properties";
+    public static final String pathToPropertyFile = "src/test/resources/properties/task.properties";
+    private static final String pathToBrowserPropertyFile = "src/test/resources/properties/browser.properties";
+    private static final String pathToWikipediaPropertyFile = "src/test/resources/properties/wikipedia.properties";
 
-    public static String getProperty(String key) {
-        return getValuePipeline(key);
+    public static String getBaseUrl() {
+        return getProperty(pathToWikipediaPropertyFile, "baseUrl");
     }
 
-    public static Properties getPropertyFile() {
+    public static String getBrowserName() {
+        return getProperty(pathToBrowserPropertyFile, "browserName");
+    }
+
+    public static String getBrowserWidth() {
+        return getProperty(pathToBrowserPropertyFile, "resolutionWidth");
+    }
+
+    public static String getBrowserHeight() {
+        return getProperty(pathToBrowserPropertyFile, "resolutionHeight");
+    }
+
+    public static String getProperty(String pathToPropertyFile, String key) {
+        return getValuePipeline(pathToPropertyFile, key);
+    }
+
+    public static Properties getPropertyFile(String pathToPropertyFile) {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(pathToPropertyFile));
@@ -21,12 +39,12 @@ public class PropertiesLoader {
         return properties;
     }
 
-    private static String getPropertyValueFromFile(String key) {
-        return getPropertyFile().getProperty(key);
+    private static String getPropertyValueFromFile(String pathToPropertyFile, String key) {
+        return getPropertyFile(pathToPropertyFile).getProperty(key);
     }
 
-    private static String getValuePipeline(String key) {
-        String localProperty = getPropertyValueFromFile(key);
+    private static String getValuePipeline(String pathToPropertyFile, String key) {
+        String localProperty = getPropertyValueFromFile(pathToPropertyFile, key);
         if (localProperty != null) {
             return localProperty;
         }

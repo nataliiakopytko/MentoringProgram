@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class TestClass {
     public static void main(String[] args) throws KeyAlreadyExistsException {
-        Properties properties = PropertiesLoader.getPropertyFile();
+        Properties properties = PropertiesLoader.getPropertyFile(PropertiesLoader.pathToPropertyFile);
         Set<Integer> keys = Helper.getSetOfKeys(properties);
 
         Map<Integer, String> mapFromProperties = Helper.getMapFromProperties(keys);
