@@ -5,12 +5,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class BrowserWaiter extends Browser {
-
-    private long pollingInterval = TimeOutConstants.DEFAULT_POLLING_INTERVAL_500_MS;
 
     public void waitForElementDisplayed(final WebElement element, final long... msToWait) {
         long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
@@ -32,7 +29,7 @@ public class BrowserWaiter extends Browser {
                     return false;
                 }
             }, msToWaitLoc);
-            changeTimeOutsAndWait(waiter, TimeOutConstants.DEFAULT_IMPLICIT_WAIT_50_MS, TimeOutConstants.DEFAULT_POLLING_TIMEOUT_10_MS);
+            waiter.applyWait();
         } catch (TimeoutException e) {
             throw new TimeoutException(String.format("The element '%s' is not displayed after timeout '%d' millisec(s).", element, msToWaitLoc));
         }
@@ -56,31 +53,17 @@ public class BrowserWaiter extends Browser {
                             return true;
                         }
                     }, msToWaitLoc);
-            changeTimeOutsAndWait(waiter, TimeOutConstants.DEFAULT_IMPLICIT_WAIT_50_MS, TimeOutConstants.DEFAULT_POLLING_TIMEOUT_10_MS);
+            waiter.applyWait();
         } catch (TimeoutException e) {
             throw new TimeoutException(String.format("The Element '%s' is still displayed after timeout '%d' millisec(s).", element, msToWaitLoc));
         }
     }
 
-    public void setPollingInterval(final long... interval) {
-        pollingInterval = interval.length > 0 ? interval[0] : TimeOutConstants.DEFAULT_POLLING_INTERVAL_500_MS;
-    }
-
-    public void setImplicitlyWait(final long... msToWait) {
-        final long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_IMPLICIT_WAIT_3_000_MS;
-        getDriver().manage().timeouts().implicitlyWait(msToWaitLoc, TimeUnit.MILLISECONDS);
-    }
-
-    public void changeTimeOutsAndWait(Waiter waiter, long implicitlyWait, long pollingInterval) {
-        setImplicitlyWait(implicitlyWait);
-        setPollingInterval(pollingInterval);
-        waiter.applyWait();
-    }
-
-    public <T> T waitUntilExpected(Function<WebDriver, T> function, final long... msToWait) {
+    public <T> void waitUntilExpected(Function<WebDriver, T> function, final long... msToWait) {
         long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
         WebDriverWait wait = new WebDriverWait(getDriver(), msToWaitLoc / 1000);
+        long pollingInterval = TimeOutConstants.DEFAULT_POLLING_INTERVAL_500_MS;
         wait.pollingEvery(Duration.of(pollingInterval, ChronoUnit.MILLIS));
-        return wait.until(function);
+        wait.until(function);
     }
 }
