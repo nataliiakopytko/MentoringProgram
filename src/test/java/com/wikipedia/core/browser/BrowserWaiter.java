@@ -1,5 +1,6 @@
-package com.wikipedia.core;
+package com.wikipedia.core.browser;
 
+import com.wikipedia.core.TimeOutConstants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -9,6 +10,7 @@ import java.util.function.Function;
 
 public class BrowserWaiter extends Browser {
 
+    //<editor-fold desc="Public Methods">
     public void waitForElementDisplayed(final WebElement element, final long... msToWait) {
         long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
         try {
@@ -66,4 +68,5 @@ public class BrowserWaiter extends Browser {
         wait.pollingEvery(Duration.of(pollingInterval, ChronoUnit.MILLIS));
         wait.until(function);
     }
+    //</editor-fold>
 }

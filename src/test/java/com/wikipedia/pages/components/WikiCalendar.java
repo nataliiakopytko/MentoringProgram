@@ -1,7 +1,7 @@
 package com.wikipedia.pages.components;
 
-import com.wikipedia.core.Browser;
 import com.wikipedia.core.TimeOutConstants;
+import com.wikipedia.core.browser.Browser;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;

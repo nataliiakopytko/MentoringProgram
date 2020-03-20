@@ -1,22 +1,27 @@
-package com.wikipedia.core;
+package com.wikipedia.core.browser;
 
 import hometask2.PropertiesLoader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static io.github.bonigarcia.wdm.DriverManagerType.*;
+import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
+import static io.github.bonigarcia.wdm.DriverManagerType.EDGE;
+import static io.github.bonigarcia.wdm.DriverManagerType.FIREFOX;
 
 public class BrowserInit {
-    public static String browserName;
+    private static String browserName;
     private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
-    final static Logger logger = LoggerFactory.getLogger(Browser.class);
+    static final Logger logger = LoggerFactory.getLogger(Browser.class);
+    private static String chromeVersion = "80.0.3987.106";
 
+    //<editor-fold desc="Enums">
     @AllArgsConstructor
     public enum BrowserName {
         EDGE("edge"),
@@ -30,7 +35,9 @@ public class BrowserInit {
             return name;
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Public Methods">
     public static WebDriver getDriver() {
         if (webDriver.get() == null) {
             browserName = PropertiesLoader.getBrowserName();
@@ -54,7 +61,9 @@ public class BrowserInit {
             }
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Private Methods">
     private static void init(String browser) {
         BrowserName name = BrowserName.valueOf(BrowserName.class, browser.toUpperCase());
         switch (name) {
@@ -65,8 +74,11 @@ public class BrowserInit {
                 break;
             case CHROME:
                 logger.info("======Setting up Chrome browser======");
-                WebDriverManager.getInstance(CHROME).setup();
-                webDriver.set(new ChromeDriver());
+                WebDriverManager.getInstance(CHROME).version(chromeVersion).setup();
+//                WebDriverManager.getInstance(CHROME).setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--no-sandbox");
+                webDriver.set(new ChromeDriver(options));
                 break;
             case EDGE:
                 logger.info("======Setting up Edge browser======");
@@ -78,4 +90,5 @@ public class BrowserInit {
                 throw new IllegalArgumentException(String.format("Can't initialize browser '%s'", browser));
         }
     }
+    //</editor-fold>
 }

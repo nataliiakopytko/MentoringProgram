@@ -1,37 +1,34 @@
 package com.wikipedia.pages.components;
 
-import com.wikipedia.core.Browser;
 import com.wikipedia.core.TimeOutConstants;
+import com.wikipedia.core.browser.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Coordinates implements BaseElement {
-    private static final String LATITUDE_XPATH = "//span[@id='coordinates']//span[@class='latitude']";
-    private static final String LONGITUDE_XPATH = "//span[@id='coordinates']//span[@class='longitude']";
 
-    public WebElement getLatitude() {
-        return Browser.getDriver().findElement(getLatitudeXpath());
-    }
+    //<editor-fold desc="Locators">
+    private static final String COORDINATES_XPATH = "//span[@id='coordinates']//a[@class='external text']";
+    //</editor-fold>
 
-    public WebElement getLongitude() {
-        return Browser.getDriver().findElement(getLongitudeXpath());
-    }
-
+    //<editor-fold desc="Public Methods">
     public String getFullCoordinates() {
-        return getLatitude().getText() + getLongitude().getText();
+        return getCoordinates().getText();
+    }
+
+    private WebElement getCoordinates() {
+        return Browser.getDriver().findElement(geCoordinatesXpath());
     }
 
     @Override
     public void waitForDisplay() {
-        Browser.waiter().waitForElementDisplayed(getLatitude(), TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS);
-        Browser.waiter().waitForElementDisplayed(getLongitude(), TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS);
+        Browser.waiter().waitForElementDisplayed(getCoordinates(), TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS);
     }
+    //</editor-fold>
 
-    private By getLatitudeXpath() {
-        return By.xpath(LATITUDE_XPATH);
+    //<editor-fold desc="Private Methods">
+    private By geCoordinatesXpath() {
+        return By.xpath(COORDINATES_XPATH);
     }
-
-    private By getLongitudeXpath() {
-        return By.xpath(LONGITUDE_XPATH);
-    }
+    //</editor-fold>
 }

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Context {
-    private final static Logger logger = LoggerFactory.getLogger(Context.class);
+    private static final Logger logger = LoggerFactory.getLogger(Context.class);
     private static InheritableThreadLocal<Map<String, Object>> projectContext = new InheritableThreadLocal<>();
 
     public static Object getValue(Enum<?> key) {

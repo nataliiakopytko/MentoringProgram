@@ -1,4 +1,4 @@
-package com.wikipedia.core;
+package com.wikipedia.core.browser;
 
 import hometask2.PropertiesLoader;
 import org.openqa.selenium.Dimension;

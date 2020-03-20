@@ -1,4 +1,4 @@
-package com.wikipedia.core;
+package com.wikipedia.core.browser;
 
 @FunctionalInterface
 public interface Waiter {

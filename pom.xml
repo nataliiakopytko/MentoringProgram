@@ -101,6 +101,14 @@
             <artifactId>logback-core</artifactId>
             <version>1.1.2</version>
         </dependency>
+
+        <!-- REST ASSURED -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.2.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
