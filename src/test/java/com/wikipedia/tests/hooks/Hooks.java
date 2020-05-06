@@ -1,4 +1,4 @@
-package com.wikipedia.tests;
+package com.wikipedia.tests.hooks;
 
 import com.wikipedia.core.browser.Browser;
 import com.wikipedia.core.context.Context;
@@ -13,7 +13,7 @@ public class Hooks {
         Context.initContext();
     }
 
-    @After
+    @After(order = 5)
     public void tearDown() {
         Context.destroyContext();
         Browser.closeDriver();

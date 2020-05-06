@@ -6,6 +6,7 @@ import java.util.Properties;
 
 public class PropertiesLoader {
     public static final String pathToPropertyFile = "src/test/resources/properties/task.properties";
+    public static final String pathToTestrailPropertyFile = "src/test/resources/properties/testrail.properties";
     private static final String pathToBrowserPropertyFile = "src/test/resources/properties/browser.properties";
     private static final String pathToWikipediaPropertyFile = "src/test/resources/properties/wikipedia.properties";
 
