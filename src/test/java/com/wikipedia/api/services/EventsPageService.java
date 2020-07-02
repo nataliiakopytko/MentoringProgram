@@ -1,4 +1,4 @@
-package com.wikipedia.api;
+package com.wikipedia.api.services;
 
 import com.wikipedia.api.base.EventsResponse;
 import com.wikipedia.core.browser.Browser;

@@ -74,8 +74,8 @@ public class BrowserInit {
                 break;
             case CHROME:
                 logger.info("======Setting up Chrome browser======");
-                WebDriverManager.getInstance(CHROME).version(chromeVersion).setup();
-//                WebDriverManager.getInstance(CHROME).setup();
+//                WebDriverManager.getInstance(CHROME).version(chromeVersion).setup();
+                WebDriverManager.getInstance(CHROME).setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--no-sandbox");
                 webDriver.set(new ChromeDriver(options));

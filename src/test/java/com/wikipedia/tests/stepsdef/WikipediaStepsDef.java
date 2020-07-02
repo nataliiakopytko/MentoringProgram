@@ -1,6 +1,6 @@
 package com.wikipedia.tests.stepsdef;
 
-import com.wikipedia.api.EventsPageService;
+import com.wikipedia.api.services.EventsPageService;
 import com.wikipedia.api.base.EventsResponse;
 import com.wikipedia.core.context.Context;
 import com.wikipedia.core.context.ContextKeys;
@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class WikipediaStepsDef {
-    private MainPage mainPage = (MainPage) PageFactory.getPageByIdentifier(MainPage.PAGE_IDENTIFIER);
-    private EventsPage eventsPage = (EventsPage) PageFactory.getPageByIdentifier(EventsPage.PAGE_IDENTIFIER);
-    private PageWithCoordinates pageWithCoordinates = (PageWithCoordinates) PageFactory.getPageByIdentifier(PageWithCoordinates.PAGE_IDENTIFIER);
+    private final MainPage mainPage = (MainPage) PageFactory.getPageByIdentifier(MainPage.PAGE_IDENTIFIER);
+    private final EventsPage eventsPage = (EventsPage) PageFactory.getPageByIdentifier(EventsPage.PAGE_IDENTIFIER);
+    private final PageWithCoordinates pageWithCoordinates = (PageWithCoordinates) PageFactory.getPageByIdentifier(PageWithCoordinates.PAGE_IDENTIFIER);
 
     //<editor-fold desc="Private Methods">
     private List<String> getEventsWithCoordinates() {
