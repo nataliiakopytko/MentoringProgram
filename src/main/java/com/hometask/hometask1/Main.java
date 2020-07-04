@@ -1,4 +1,4 @@
-package hometask1;
+package com.hometask.hometask1;
 
 public class Main {
     public static void main(String[] args) {

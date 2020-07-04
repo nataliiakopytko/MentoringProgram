@@ -1,7 +1,7 @@
 package com.wikipedia.tests.stepsdef;
 
-import com.wikipedia.api.services.EventsPageService;
 import com.wikipedia.api.base.EventsResponse;
+import com.wikipedia.api.services.EventsPageService;
 import com.wikipedia.core.context.Context;
 import com.wikipedia.core.context.ContextKeys;
 import com.wikipedia.core.helper.ListTransformerHelper;
@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class WikipediaStepsDef {
-    private final MainPage mainPage = (MainPage) PageFactory.getPageByIdentifier(MainPage.PAGE_IDENTIFIER);
-    private final EventsPage eventsPage = (EventsPage) PageFactory.getPageByIdentifier(EventsPage.PAGE_IDENTIFIER);
-    private final PageWithCoordinates pageWithCoordinates = (PageWithCoordinates) PageFactory.getPageByIdentifier(PageWithCoordinates.PAGE_IDENTIFIER);
+    private final MainPage mainPage = PageFactory.getPageByIdentifier(MainPage.PAGE_IDENTIFIER);
+    private final EventsPage eventsPage = PageFactory.getPageByIdentifier(EventsPage.PAGE_IDENTIFIER);
+    private final PageWithCoordinates pageWithCoordinates = PageFactory.getPageByIdentifier(PageWithCoordinates.PAGE_IDENTIFIER);
 
     //<editor-fold desc="Private Methods">
     private List<String> getEventsWithCoordinates() {
@@ -48,12 +48,6 @@ public class WikipediaStepsDef {
     public void iClickOnSectionOnWikipediaMainPage(String sectionName, String identifier) {
         mainPage.getSection(sectionName).click();
         PageFactory.getPageByIdentifier(identifier).waitForPageLoaded();
-    }
-
-    @When("^I select \"?([^\"]*)\"? day(?:s|) \"?(more|less)\"? than today on Calendar on Events page$")
-    public void iSelectDayThanTodayOnCalendarOnEventsPage(int daysNumber, String condition) {
-        int offset = "less".equals(condition) ? -daysNumber : daysNumber;
-        eventsPage.getWikiCalendar().setDateWithOffset(offset);
     }
 
     @When("^I click on any displayed geolocation on Events page and wait for Coordinates page loaded$")

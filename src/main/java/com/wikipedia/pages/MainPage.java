@@ -1,10 +1,11 @@
 package com.wikipedia.pages;
 
-import com.wikipedia.core.TimeOutConstants;
+import com.hometask.hometask2.PropertiesLoader;
 import com.wikipedia.core.browser.Browser;
-import hometask2.PropertiesLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import static com.wikipedia.core.TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS;
 
 public class MainPage extends BasePage {
     public static final String PAGE_IDENTIFIER = "Main";
@@ -28,7 +29,7 @@ public class MainPage extends BasePage {
 
     @Override
     public void waitForPageLoaded() {
-        Browser.waiter().waitForElementDisplayed(getWelcomeBanner(), TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS);
+        Browser.waiter().waitForElementDisplayed(getWelcomeBanner(), DEFAULT_TIMEOUT_5_000_MS());
     }
 
     public WebElement getWelcomeBanner() {

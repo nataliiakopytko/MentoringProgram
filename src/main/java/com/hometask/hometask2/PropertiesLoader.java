@@ -1,4 +1,4 @@
-package hometask2;
+package com.hometask.hometask2;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,8 +7,9 @@ import java.util.Properties;
 public class PropertiesLoader {
     public static final String pathToPropertyFile = "src/test/resources/properties/task.properties";
     public static final String pathToTestrailPropertyFile = "src/test/resources/properties/testrail.properties";
+    public static final String pathToTimeoutPropertyFile = "src/main/resources/properties/timeout.properties";
     private static final String pathToBrowserPropertyFile = "src/test/resources/properties/browser.properties";
-    private static final String pathToWikipediaPropertyFile = "src/test/resources/properties/wikipedia.properties";
+    private static final String pathToWikipediaPropertyFile = "src/main/resources/properties/wikipedia.properties";
 
     public static String getBaseUrl() {
         return getProperty(pathToWikipediaPropertyFile, "baseUrl");

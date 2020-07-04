@@ -1,7 +1,7 @@
-package com.wikipedia.pages.components;
+package com.wikipedia.pages.components.calendar;
 
-import com.wikipedia.core.TimeOutConstants;
 import com.wikipedia.core.browser.Browser;
+import com.wikipedia.pages.components.BaseElement;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
@@ -10,7 +10,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class WikiCalendar implements BaseElement {
+import static com.wikipedia.core.TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS;
+
+public class MainPageCalendar implements BaseElement, Calendar {
     private static final String CALENDAR_XPATH = "//table[contains(@class,'floatright')]/tbody";
     private static final String MONTH_XPATH = CALENDAR_XPATH + "/tr[@class='navbox-title']/th/a";
     private static final String DAY_OF_WEEK_XPATH = CALENDAR_XPATH + "/tr[@class='header navbox-title']/th";
@@ -19,27 +21,32 @@ public class WikiCalendar implements BaseElement {
     private static final String YEAR_XPATH = CALENDAR_XPATH + "/tr[@class='navbox-title']//b/a";
     private static final String CHANGE_MONTH_RIGHT_XPATH = CALENDAR_XPATH + "/tr[@class='navbox-title']//a[text()='>>']";
 
+    @Override
     public WebElement getCalendarBase() {
         return Browser.getDriver().findElement(getCalendarXpath());
     }
 
+    @Override
     public WebElement getButtonChangeMonth() {
         return Browser.getDriver().findElement(getChangeMonthXpath());
     }
 
+    @Override
     public List<WebElement> getDaysOfMonth() {
         return Browser.getDriver().findElements(getDayXpath());
     }
 
+    @Override
     public WebElement getSelectedDayOfMonth() {
         return Browser.getDriver().findElement(getSelectedDayXpath());
     }
 
     @Override
     public void waitForDisplay() {
-        Browser.waiter().waitForElementDisplayed(getCalendarBase(), TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS);
+        Browser.waiter().waitForElementDisplayed(getCalendarBase(), DEFAULT_TIMEOUT_5_000_MS());
     }
 
+    @Override
     public void setDateWithOffset(int offsetWithSign) {
         DateTime dateTime = new DateTime().plusDays(offsetWithSign);
         setDate(dateTime);

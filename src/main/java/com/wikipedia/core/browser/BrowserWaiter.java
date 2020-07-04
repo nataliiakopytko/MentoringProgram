@@ -1,18 +1,21 @@
 package com.wikipedia.core.browser;
 
-import com.wikipedia.core.TimeOutConstants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
+
+import static com.wikipedia.core.TimeOutConstants.DEFAULT_POLLING_INTERVAL_500_MS;
+import static com.wikipedia.core.TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
 
 public class BrowserWaiter extends Browser {
 
     //<editor-fold desc="Public Methods">
     public void waitForElementDisplayed(final WebElement element, final long... msToWait) {
-        long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
+        long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : DEFAULT_TIMEOUT_10_000_MS();
         try {
             Waiter waiter = () -> waitUntilExpected(webDriver -> {
                 try {
@@ -38,7 +41,7 @@ public class BrowserWaiter extends Browser {
     }
 
     public void waitForElementIsNotDisplayed(final By element, final long... msToWait) {
-        long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
+        long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : DEFAULT_TIMEOUT_10_000_MS();
         try {
             Waiter waiter = () ->
                     waitUntilExpected(webDriver -> {
@@ -62,9 +65,9 @@ public class BrowserWaiter extends Browser {
     }
 
     public <T> void waitUntilExpected(Function<WebDriver, T> function, final long... msToWait) {
-        long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : TimeOutConstants.DEFAULT_TIMEOUT_10_000_MS;
+        long msToWaitLoc = msToWait.length > 0 ? msToWait[0] : DEFAULT_TIMEOUT_10_000_MS();
         WebDriverWait wait = new WebDriverWait(getDriver(), msToWaitLoc / 1000);
-        long pollingInterval = TimeOutConstants.DEFAULT_POLLING_INTERVAL_500_MS;
+        long pollingInterval = DEFAULT_POLLING_INTERVAL_500_MS();
         wait.pollingEvery(Duration.of(pollingInterval, ChronoUnit.MILLIS));
         wait.until(function);
     }

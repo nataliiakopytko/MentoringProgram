@@ -1,6 +1,6 @@
 package com.wikipedia.core.browser;
 
-import hometask2.PropertiesLoader;
+import com.hometask.hometask2.PropertiesLoader;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 

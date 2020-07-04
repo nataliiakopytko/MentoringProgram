@@ -3,16 +3,16 @@ package com.wikipedia.pages;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class PageFactory {
     private static final ThreadLocal<Map<String, Object>> pageMapper = new ThreadLocal<>();
 
     //<editor-fold desc="Public Methods">
-    public static BasePage getPageByIdentifier(String identifier) {
-        Object obj = getObjectByClassIdentifier(identifier);
-        if (obj instanceof BasePage) {
-            return (BasePage) obj;
-        } else {
-            throw new IllegalArgumentException(String.format("Page '%s' does not extend class BasePage", obj.getClass().getName()));
+    public static <T extends BasePage> T getPageByIdentifier(String identifier) {
+        try {
+            return (T) getObjectByClassIdentifier(identifier);
+        } catch (Exception e) {
+            throw new UnsupportedOperationException(String.format("Can't initialize page '%s' because of uncaught exception '%s'", identifier, e));
         }
     }
     //</editor-fold>

@@ -1,4 +1,4 @@
-package hometask2;
+package com.hometask.hometask2;
 
 import java.util.Map;
 import java.util.Properties;

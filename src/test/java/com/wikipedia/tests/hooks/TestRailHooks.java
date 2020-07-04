@@ -2,9 +2,7 @@ package com.wikipedia.tests.hooks;
 
 import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.*;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import hometask2.PropertiesLoader;
+import com.hometask.hometask2.PropertiesLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

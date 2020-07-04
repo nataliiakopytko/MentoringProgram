@@ -1,11 +1,11 @@
-package hometask2;
+package com.hometask.hometask2;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static hometask2.PropertiesLoader.pathToPropertyFile;
+import static com.hometask.hometask2.PropertiesLoader.pathToPropertyFile;
 
 class Helper {
     static Map<Integer, String> getMapFromProperties(Set<Integer> keys) {
@@ -36,7 +36,7 @@ class Helper {
     }
 
     static void writeToFile(Map<String, Integer> map) {
-        String fileToWritePath = "src/test/java/hometask2/files/file.txt";
+        String fileToWritePath = "src/test/java/com.hometask.hometask2/files/file.txt";
         try (FileOutputStream fos = new FileOutputStream(fileToWritePath)) {
             byte[] buffer = map.toString().getBytes();
             fos.write(buffer, 0, buffer.length);

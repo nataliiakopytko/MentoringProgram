@@ -1,9 +1,10 @@
 package com.wikipedia.pages.components;
 
-import com.wikipedia.core.TimeOutConstants;
 import com.wikipedia.core.browser.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import static com.wikipedia.core.TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS;
 
 public class Coordinates implements BaseElement {
 
@@ -22,7 +23,7 @@ public class Coordinates implements BaseElement {
 
     @Override
     public void waitForDisplay() {
-        Browser.waiter().waitForElementDisplayed(getCoordinates(), TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS);
+        Browser.waiter().waitForElementDisplayed(getCoordinates(), DEFAULT_TIMEOUT_5_000_MS());
     }
     //</editor-fold>
 

@@ -1,9 +1,7 @@
 package com.wikipedia.pages;
 
+import com.hometask.hometask2.PropertiesLoader;
 import com.wikipedia.core.browser.Browser;
-import com.wikipedia.pages.components.WikiCalendar;
-import hometask2.PropertiesLoader;
-import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -13,12 +11,12 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+import static com.wikipedia.core.TimeOutConstants.DEFAULT_TIMEOUT_5_000_MS;
+
 public class EventsPage extends BasePage {
     public static final String PAGE_IDENTIFIER = "Events";
     private static final String PAGE_URL = PropertiesLoader.getBaseUrl() + "/%s";
     private static final Logger logger = LoggerFactory.getLogger(EventsPage.class);
-    private WikiCalendar wikiCalendar = new WikiCalendar();
 
     //<editor-fold desc="Locators">
     private static final String EVENTS_LINKS_XPATH = "//span[@id='Events']/ancestor::h2/following-sibling::ul/li/a";
@@ -33,7 +31,7 @@ public class EventsPage extends BasePage {
 
     @Override
     public void waitForPageLoaded() {
-        getWikiCalendar().waitForDisplay();
+        Browser.waiter().waitForElementDisplayed(getPageHeader(), DEFAULT_TIMEOUT_5_000_MS());
     }
 
     public WebElement getGeolocation(String locationName) {

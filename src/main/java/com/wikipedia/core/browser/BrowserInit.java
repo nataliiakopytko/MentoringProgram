@@ -1,6 +1,6 @@
 package com.wikipedia.core.browser;
 
-import hometask2.PropertiesLoader;
+import com.hometask.hometask2.PropertiesLoader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
-import static io.github.bonigarcia.wdm.DriverManagerType.EDGE;
-import static io.github.bonigarcia.wdm.DriverManagerType.FIREFOX;
+import static io.github.bonigarcia.wdm.DriverManagerType.*;
 
 public class BrowserInit {
     private static String browserName;
