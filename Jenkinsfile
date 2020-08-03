@@ -3,17 +3,23 @@ pipeline{
     stages{
         stage ('Compile'){
             steps{
-                mvn clean compile
+                withMaven(maven:'mvn_3_6_3'){
+                    sh 'mvn clean compile'
+                }
             }
         }
         stage('Test'){
             steps{
-                mvn test
+                withMaven(maven:'mvn_3_6_3'){
+                    sh 'mvn test' 
+                }
             }
         }
         stage('Verify'){
             steps{
-                mvn verify
+                withMaven(maven:'mvn_3_6_3'){
+                    sh 'mvn verify'
+                }
             }
         }
     }
