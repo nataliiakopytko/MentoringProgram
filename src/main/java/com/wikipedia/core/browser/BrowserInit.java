@@ -75,6 +75,7 @@ public class BrowserInit {
 //                WebDriverManager.getInstance(CHROME).version(chromeVersion).setup();
                 WebDriverManager.getInstance(CHROME).setup();
                 ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
                 options.addArguments("--no-sandbox");
                 webDriver.set(new ChromeDriver(options));
                 break;
